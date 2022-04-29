@@ -4,14 +4,18 @@ import com.pela.learningmvvm.data.model.AnimeProvider
 import com.pela.learningmvvm.data.model.AnimesPagesResponse
 import com.pela.learningmvvm.data.model.Data
 import com.pela.learningmvvm.data.network.AnimeService
+import javax.inject.Inject
 
-class AnimeRepository {
+class AnimeRepository @Inject constructor(
+    private val api : AnimeService,
+    private val animeProvider: AnimeProvider
+) {
 
-    private val api = AnimeService()
+
 
     suspend fun getAllAnimes(): List<Data>{
         val response: List<Data> = api.getAnimes()
-        AnimeProvider.animes = response
+        animeProvider.animes = response
         return response
     }
 }

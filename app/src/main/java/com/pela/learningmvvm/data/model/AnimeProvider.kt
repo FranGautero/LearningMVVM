@@ -1,10 +1,9 @@
 package com.pela.learningmvvm.data.model
 
-class AnimeProvider {
+import javax.inject.Inject
+import javax.inject.Singleton
 
-    companion object {
-
-        var animes:List<Data> = emptyList()
-
-    }
+@Singleton
+class AnimeProvider @Inject constructor() {
+    var animes: List<Data> = emptyList()
 }
