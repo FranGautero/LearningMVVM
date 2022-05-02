@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.pela.learningmvvm.data.model.Data
 import com.pela.learningmvvm.domain.GetAnimesUseCase
 import com.pela.learningmvvm.domain.GetRandomAnimeUseCase
+import com.pela.learningmvvm.domain.model.Anime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,7 +17,7 @@ class AnimeViewModel @Inject constructor(
     private val getRandomAnimeUseCase: GetRandomAnimeUseCase
 ) : ViewModel() {
 
-    val animeModel = MutableLiveData<Data>()
+    val animeModel = MutableLiveData<Anime>()
     val isLoading = MutableLiveData<Boolean>()
 
     fun onCreate(){
@@ -31,13 +32,16 @@ class AnimeViewModel @Inject constructor(
     }
 
     fun randomAnime(){
-        isLoading.postValue(true)
-        val anime = getRandomAnimeUseCase()
-        if(anime!=null){
-            animeModel.postValue(anime)
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            val anime = getRandomAnimeUseCase()
+            if(anime!=null){
+                animeModel.postValue(anime)
+            }
+
+            isLoading.postValue(false)
         }
 
-        isLoading.postValue(false)
 
     }
 

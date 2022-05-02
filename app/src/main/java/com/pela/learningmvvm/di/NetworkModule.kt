@@ -1,4 +1,4 @@
-package com.pela.learningmvvm.core.di
+package com.pela.learningmvvm.di
 
 import com.pela.learningmvvm.data.network.AnimeApiClient
 import dagger.Module
