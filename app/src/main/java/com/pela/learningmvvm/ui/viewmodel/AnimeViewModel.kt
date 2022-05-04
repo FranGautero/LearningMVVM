@@ -3,9 +3,9 @@ package com.pela.learningmvvm.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pela.learningmvvm.data.model.Data
+import androidx.recyclerview.widget.RecyclerView
+import com.pela.learningmvvm.R
 import com.pela.learningmvvm.domain.GetAnimesUseCase
-import com.pela.learningmvvm.domain.GetRandomAnimeUseCase
 import com.pela.learningmvvm.domain.model.Anime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,10 +14,10 @@ import javax.inject.Inject
 @HiltViewModel
 class AnimeViewModel @Inject constructor(
     private val getAnimesUseCase:GetAnimesUseCase,
-    private val getRandomAnimeUseCase: GetRandomAnimeUseCase
+
 ) : ViewModel() {
 
-    val animeModel = MutableLiveData<Anime>()
+    val animeModel = MutableLiveData<List<Anime>>()
     val isLoading = MutableLiveData<Boolean>()
 
     fun onCreate(){
@@ -25,25 +25,15 @@ class AnimeViewModel @Inject constructor(
             isLoading.postValue(true)
             val result = getAnimesUseCase()
             if(!result.isNullOrEmpty()){
-                animeModel.postValue(result[0])
+                animeModel.postValue(result)
                 isLoading.postValue(false)
             }
         }
     }
 
-    fun randomAnime(){
-        viewModelScope.launch {
-            isLoading.postValue(true)
-            val anime = getRandomAnimeUseCase()
-            if(anime!=null){
-                animeModel.postValue(anime)
-            }
-
-            isLoading.postValue(false)
-        }
 
 
-    }
+
 
 
 }

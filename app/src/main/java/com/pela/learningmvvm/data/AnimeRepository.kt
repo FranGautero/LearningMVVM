@@ -17,9 +17,9 @@ class AnimeRepository @Inject constructor(
 
 
 
-    suspend fun getAllAnimesFromApi(): List<Anime>{
-        val response: List<Data> = api.getAnimes()
-        return response.map { it.toDomain() }
+    suspend fun getAllAnimesFromApi(page: Int): List<Anime>{
+        val response: AnimesPagesResponse = api.getAnimes(page)
+        return response.data.map { it.toDomain() }
     }
 
     suspend fun getAllAnimesFromDb(): List<Anime>{

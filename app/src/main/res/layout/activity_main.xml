@@ -5,37 +5,16 @@
     android:id="@+id/viewContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/black"
     tools:context=".ui.view.MainActivity">
 
-    <TextView
-        android:id="@+id/animeTitle"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAnimeList"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="TITLE"
-        android:gravity="center"
-        android:padding="16dp"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:id="@+id/animeSyn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Synopsis"
-        android:gravity="center"
-        android:padding="16dp"
-        android:layout_marginBottom="8dp"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="wrap_content"

@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Francisco/AndroidStudioProjects/LearningMVVM/app/src/main/res/drawable/corner_rounded.xml" value="0.1725" />
+        <entry key="..\:/Users/Francisco/AndroidStudioProjects/LearningMVVM/app/src/main/res/drawable/gradient.xml" value="0.1945" />
         <entry key="..\:/Users/Francisco/AndroidStudioProjects/LearningMVVM/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Francisco/AndroidStudioProjects/LearningMVVM/app/src/main/res/layout/anime_item.xml" value="0.1" />
       </map>
     </option>
   </component>

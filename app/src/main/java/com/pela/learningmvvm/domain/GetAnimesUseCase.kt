@@ -14,7 +14,8 @@ class GetAnimesUseCase @Inject constructor(
 
     suspend operator fun invoke():List<Anime> {
 
-        val animes = repository.getAllAnimesFromApi()
+        val page: Int = 1
+        val animes = repository.getAllAnimesFromApi(page)
 
         return if(animes.isNotEmpty()){
           repository.clearAnime()
