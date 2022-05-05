@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +16,12 @@ import com.pela.learningmvvm.databinding.ActivityMainBinding
 import com.pela.learningmvvm.domain.model.Anime
 import com.pela.learningmvvm.ui.adapters.AnimeAdapter
 import com.pela.learningmvvm.ui.viewmodel.AnimeViewModel
+
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -28,26 +35,51 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        animeViewModel.onCreate()
+//        animeViewModel.onCreate()
+//
+//        animeViewModel.animeModel.observe(this, Observer { currentAnime ->
+//            initRecyclerView(currentAnime)
+//        })
 
-        animeViewModel.animeModel.observe(this, Observer { currentAnime ->
-            initRecyclerView(currentAnime)
-        })
+        binding.rvAnimeList.layoutManager = GridLayoutManager(this, 2)
+        val pagingAdapter = AnimeAdapter(){ anime ->
+            onItemSelected(anime)
+        }
+        binding.rvAnimeList.adapter = pagingAdapter
+
+
+        lifecycleScope.launch {
+            animeViewModel.flow.collectLatest {
+                pagingAdapter.submitData(it)
+            }
+        }
 
         animeViewModel.isLoading.observe(this, Observer { isItLoading ->
             binding.progress.isVisible = isItLoading
         })
 
+
     }
 
-    fun initRecyclerView(animeList: List<Anime>) {
-        binding.rvAnimeList.layoutManager = GridLayoutManager(this, 2)
-        binding.rvAnimeList.adapter = AnimeAdapter(animeList) { anime ->
-            onItemSelected(anime)
-        }
-    }
+//    fun initRecyclerView(currentAnime: Flow<PagingData<Anime>>) {
+//        binding.rvAnimeList.layoutManager = GridLayoutManager(this, 2)
+//        binding.rvAnimeList.adapter = AnimeAdapter() { anime ->
+//            onItemSelected(anime)
+//        }
+//        collectUiState(currentAnime, binding.rvAnimeList.adapter as AnimeAdapter)
+//    }
 
-    fun onItemSelected(anime: Anime) {
+    private fun onItemSelected(anime: Anime) {
         Toast.makeText(this, anime.title, Toast.LENGTH_SHORT).show()
     }
+
+//    private fun collectUiState(currentAnime: Flow<PagingData<Anime>>, adapter: AnimeAdapter) {
+//        lifecycleScope.launch {
+//            currentAnime.collectLatest { movies ->
+//                adapter.submitData(movies)
+//            }
+//        }
+
+
+
 }

@@ -1,5 +1,6 @@
 package com.pela.learningmvvm.data.database.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -10,6 +11,9 @@ import com.pela.learningmvvm.data.database.entities.AnimeEntity
 interface AnimeDao {
     @Query("SELECT * FROM anime_table")
     suspend fun getAllAnime(): List<AnimeEntity>
+
+//    @Query("SELECT * FROM anime_table")
+//    suspend fun getAllAnimePaging(): PagingSource<Int, AnimeEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(anime: List<AnimeEntity>)

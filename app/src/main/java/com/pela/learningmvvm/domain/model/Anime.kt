@@ -19,7 +19,7 @@ data class Anime(
 fun Data.toDomain() = Anime(
     title = title,
     image = images.jpg.image_url,
-    synopsis = synopsis,
+    synopsis = "$synopsis",
     score = score.toString(),
     status = status,
     episodes = episodes.toString(),
