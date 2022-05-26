@@ -15,7 +15,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit():Retrofit{
+    fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://api.jikan.moe/v4/seasons/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -24,7 +24,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideAnimeApiClient(retrofit: Retrofit):AnimeApiClient{
+    fun provideAnimeApiClient(retrofit: Retrofit): AnimeApiClient {
         return retrofit.create(AnimeApiClient::class.java)
     }
 }

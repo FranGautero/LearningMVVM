@@ -9,12 +9,12 @@ import javax.inject.Singleton
 
 
 class AnimeService @Inject constructor(
-    private val api:AnimeApiClient
+    private val api: AnimeApiClient
 ) {
 
     @Singleton
-    suspend fun getAnimes(page: Int):AnimesPagesResponse{
-        return withContext(Dispatchers.IO){
+    suspend fun getAnimes(page: Int): AnimesPagesResponse {
+        return withContext(Dispatchers.IO) {
             val response = api.getAllAnimes(page)
             response.body()!!
         }

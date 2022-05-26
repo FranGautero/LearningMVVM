@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface AnimeApiClient {
     @GET("now")
-    suspend fun getAllAnimes(@Query("page") page: Int):Response<AnimesPagesResponse>
+    suspend fun getAllAnimes(@Query("page") page: Int): Response<AnimesPagesResponse>
 }

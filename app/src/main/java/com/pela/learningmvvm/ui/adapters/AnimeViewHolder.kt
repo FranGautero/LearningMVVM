@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.pela.learningmvvm.databinding.AnimeItemBinding
 import com.pela.learningmvvm.domain.model.Anime
 
-class AnimeViewHolder(view: View): RecyclerView.ViewHolder(view) {
+class AnimeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     val binding = AnimeItemBinding.bind(view)
 
@@ -18,7 +18,7 @@ class AnimeViewHolder(view: View): RecyclerView.ViewHolder(view) {
         binding.tvTitle.text = animeModel.title
         binding.tvScore.text = animeModel.score
         Glide.with(binding.ivAnime.context).load(animeModel.image).into(binding.ivAnime)
-        itemView.setOnClickListener{
+        itemView.setOnClickListener {
             onClickListener(animeModel)
         }
     }

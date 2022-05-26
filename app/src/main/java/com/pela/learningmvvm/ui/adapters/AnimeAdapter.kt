@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pela.learningmvvm.R
 import com.pela.learningmvvm.domain.model.Anime
 
-class AnimeAdapter(private val onClickListener: (Anime) -> Unit) : PagingDataAdapter<Anime, AnimeViewHolder>(ANIME_COMPARATOR) {
+class AnimeAdapter(private val onClickListener: (Anime) -> Unit) :
+    PagingDataAdapter<Anime, AnimeViewHolder>(ANIME_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimeViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -17,10 +18,9 @@ class AnimeAdapter(private val onClickListener: (Anime) -> Unit) : PagingDataAda
     }
 
 
-
     override fun onBindViewHolder(holder: AnimeViewHolder, position: Int) {
         val item = getItem(position)
-        holder.render(item!! , onClickListener)
+        holder.render(item!!, onClickListener)
     }
 
     companion object {

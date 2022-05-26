@@ -35,14 +35,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        animeViewModel.onCreate()
-//
-//        animeViewModel.animeModel.observe(this, Observer { currentAnime ->
-//            initRecyclerView(currentAnime)
-//        })
 
         binding.rvAnimeList.layoutManager = GridLayoutManager(this, 2)
-        val pagingAdapter = AnimeAdapter(){ anime ->
+        val pagingAdapter = AnimeAdapter() { anime ->
             onItemSelected(anime)
         }
         binding.rvAnimeList.adapter = pagingAdapter
@@ -54,32 +49,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        animeViewModel.isLoading.observe(this, Observer { isItLoading ->
-            binding.progress.isVisible = isItLoading
-        })
-
-
     }
-
-//    fun initRecyclerView(currentAnime: Flow<PagingData<Anime>>) {
-//        binding.rvAnimeList.layoutManager = GridLayoutManager(this, 2)
-//        binding.rvAnimeList.adapter = AnimeAdapter() { anime ->
-//            onItemSelected(anime)
-//        }
-//        collectUiState(currentAnime, binding.rvAnimeList.adapter as AnimeAdapter)
-//    }
 
     private fun onItemSelected(anime: Anime) {
         Toast.makeText(this, anime.title, Toast.LENGTH_SHORT).show()
     }
-
-//    private fun collectUiState(currentAnime: Flow<PagingData<Anime>>, adapter: AnimeAdapter) {
-//        lifecycleScope.launch {
-//            currentAnime.collectLatest { movies ->
-//                adapter.submitData(movies)
-//            }
-//        }
-
-
 
 }
